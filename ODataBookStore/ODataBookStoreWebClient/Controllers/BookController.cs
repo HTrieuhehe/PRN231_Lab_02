@@ -4,6 +4,7 @@ using ODataBookStore.Models;
 using ODataBookStore.Models.Request;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace ODataBookStoreWebClient.Controllers
 {
@@ -18,7 +19,7 @@ namespace ODataBookStoreWebClient.Controllers
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
 
-            ProductApiUrl = "https://localhost:7057/odata/Book";
+            ProductApiUrl = "https://localhost:44319/odata/Book";
         }
           
         public async Task<IActionResult> Index()
@@ -37,6 +38,7 @@ namespace ODataBookStoreWebClient.Controllers
             }).ToList();
             return View(items);
         }
+
         public async Task<IActionResult> Details(int id)
         {
             HttpResponseMessage response = await client.GetAsync(ProductApiUrl + $"/{id}?$expand=Location,Press");
@@ -67,12 +69,23 @@ namespace ODataBookStoreWebClient.Controllers
                
         }
 
-        
 
-        //public IActionResult Create()
-        //{
+        public async Task<IActionResult> Create(Book book)
+        {
+            if (book == null)
+            {
+                return View("~/Views/Book/Create.cshtml");
+            }
 
-        //}
+            string jsonString = JsonSerializer.Serialize(book);
+            HttpResponseMessage response = await client.PostAsync(ProductApiUrl + $"{book}", null);
+
+            if(response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Book");
+            }
+            return View();
+        }
 
 
         //[HttpPost]

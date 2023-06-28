@@ -36,8 +36,8 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "books",
-        pattern: "books/{action}/{id?}",
-    //defaults: new { controller = "Book" });
+        pattern: "Book/{action}/{id?}",
+    defaults: new { controller = "Book" },
 
     endpoints.MapControllerRoute(
         name: "default",
