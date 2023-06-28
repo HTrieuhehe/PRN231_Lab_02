@@ -98,31 +98,8 @@ namespace ODataBookStore
                     }
                 });
             });
-            services.ConfigureAuthServices(Configuration);
-
-            #region Firebase
-            var pathToKey = Path.Combine(Directory.GetCurrentDirectory(), "Keys", "firebase.json");
-            FirebaseApp.Create(new AppOptions
-            {
-                Credential = GoogleCredential.FromFile(pathToKey)
-            });
-            #endregion 
+            services.ConfigureAuthServices(Configuration); 
         }
-
-        //public void ConfigureContainer(ContainerBuilder builder)
-        //{
-        //    // Register your own things directly with Autofac, like:
-        //    builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-
-        //    builder.RegisterType<AccountService>().As<IAccountService>();
-        //    builder.RegisterType<FirebaseMessagingService>().As<IFirebaseMessagingService>();
-        //    builder.RegisterType<ProductService>().As<IProductService>();
-        //    builder.RegisterType<ReactionService>().As<IReactionService>();
-
-        //    builder.RegisterGeneric(typeof(GenericRepository<>))
-        //    .As(typeof(IGenericRepository<>))
-        //    .InstancePerLifetimeScope();
-        //}
 
         public void Configure(IApplicationBuilder app)
         {

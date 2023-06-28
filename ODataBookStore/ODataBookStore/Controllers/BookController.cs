@@ -66,7 +66,7 @@ namespace ODataBookStore.Controllers
                     đoạn code này sẽ check nếu bảng Role nó null sẽ tạo dữ liệu với với Id = 1 <=> Account và Id =2 <=> User :)))
                  */
 
-                var checkRole = _context.Roles;
+                var checkRole = _context.Roles.FirstOrDefault();
                 if (checkRole == null)
                 {
                     Role accountRole = new Role();

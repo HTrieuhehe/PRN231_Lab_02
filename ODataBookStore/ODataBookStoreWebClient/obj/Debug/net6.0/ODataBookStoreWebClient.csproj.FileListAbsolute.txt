@@ -671,7 +671,6 @@ F:\ProjectStudy\PRN_231\ODataBookStore\ODataBookStoreWebClient\obj\Debug\net6.0\
 F:\ProjectStudy\PRN_231\ODataBookStore\ODataBookStoreWebClient\obj\Debug\net6.0\ref\ODataBookStoreWebClient.dll
 F:\ProjectStudy\PRN_231\PRN231_Lab_02\ODataBookStore\ODataBookStoreWebClient\bin\Debug\net6.0\ODataBookStore.deps.json
 F:\ProjectStudy\PRN_231\PRN231_Lab_02\ODataBookStore\ODataBookStoreWebClient\bin\Debug\net6.0\ODataBookStore.runtimeconfig.json
-F:\ProjectStudy\PRN_231\PRN231_Lab_02\ODataBookStore\ODataBookStoreWebClient\bin\Debug\net6.0\Keys\firebase.json
 F:\ProjectStudy\PRN_231\PRN231_Lab_02\ODataBookStore\ODataBookStoreWebClient\bin\Debug\net6.0\ODataBookStore.exe
 F:\ProjectStudy\PRN_231\PRN231_Lab_02\ODataBookStore\ODataBookStoreWebClient\bin\Debug\net6.0\appsettings.Development.json
 F:\ProjectStudy\PRN_231\PRN231_Lab_02\ODataBookStore\ODataBookStoreWebClient\bin\Debug\net6.0\appsettings.json

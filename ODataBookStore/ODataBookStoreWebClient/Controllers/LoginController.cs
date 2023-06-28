@@ -44,7 +44,6 @@ namespace ODataBookStoreWebClient.Controllers
             if (response != null)
             {
                 string strData = await response.Content.ReadAsStringAsync();
-                //dynamic temp = JObject.Parse(strData);
                 TempData["UserData"] = strData;
 
                 return RedirectToAction("../Book/Index", "Book");
