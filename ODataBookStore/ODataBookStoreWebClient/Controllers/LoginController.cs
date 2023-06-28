@@ -38,14 +38,14 @@ namespace ODataBookStoreWebClient.Controllers
         {
             //https://localhost:44319/Account/Login?username=string&password=string
 
-            HttpResponseMessage response = await client.PostAsync("https://localhost:44319/Account/Login?", new StringContent($"username={username}&password={password}"));
-            string strData = await response.Content.ReadAsStringAsync();
-
-            dynamic temp = JObject.Parse(strData);
-
-            if (temp != null)
+            HttpResponseMessage response 
+                = await client.PostAsync("https://localhost:44319/Account/Login?username=" + $"{Uri.EscapeDataString(username)}" + "&password=" + $"{Uri.EscapeDataString(password)}", null);
+            
+            if (response != null)
             {
-                TempData["UserData"] = temp;
+                string strData = await response.Content.ReadAsStringAsync();
+                //dynamic temp = JObject.Parse(strData);
+                TempData["UserData"] = strData;
 
                 return RedirectToAction("../Book/Index", "Book");
             }
