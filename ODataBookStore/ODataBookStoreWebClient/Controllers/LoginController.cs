@@ -47,7 +47,7 @@ namespace ODataBookStoreWebClient.Controllers
                 //dynamic temp = JObject.Parse(strData);
                 TempData["UserData"] = strData;
 
-                return RedirectToAction("../Book/Index", "Book");
+                return RedirectToAction("", "Book");
             }
             return View("../Login/Index");
         }

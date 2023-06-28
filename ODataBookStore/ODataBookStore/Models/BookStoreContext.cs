@@ -65,7 +65,18 @@ namespace ODataBookStore.Models
                         Street = "D6, Thu Duc District"
                     }
                     );
-
+            mb.Entity<Role>()
+                .HasData(
+                new Role
+                {
+                    Id = 1,
+                    RoleName = "Account"
+                },
+                new Role
+                {
+                    Id = 2,
+                    RoleName = "User"
+                });
             mb.Entity<Book>()
                 .HasData(
                     new Book
