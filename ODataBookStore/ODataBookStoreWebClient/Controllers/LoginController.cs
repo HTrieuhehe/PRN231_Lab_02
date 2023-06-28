@@ -36,8 +36,11 @@ namespace ODataBookStoreWebClient.Controllers
 
         public async Task<IActionResult> AccountLogin(string username, string password)
         {
-            HttpResponseMessage response = await client.GetAsync(AccountLoginApiUrl + $"username={username}&password={password}");
+            //https://localhost:44319/Account/Login?username=string&password=string
+
+            HttpResponseMessage response = await client.PostAsync("https://localhost:44319/Account/Login?", new StringContent($"username={username}&password={password}"));
             string strData = await response.Content.ReadAsStringAsync();
+
             dynamic temp = JObject.Parse(strData);
 
             if (temp != null)
