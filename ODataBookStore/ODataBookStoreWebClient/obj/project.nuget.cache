@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WFPsnEvewwlZHhc9Z9M3Wj4+P7BatwKS+YkUaInIX+5g51G0thLrCRVsE40W6cHwyvC6IUg4UzV5K1Uqp1cqXw==",
+  "dgSpecHash": "YfDjTOgYtI/uC5uuZXjwR04ynt5Ba6ksYAbcuHiVyohZZIwm0M6nfCBfXb+gfoWAm7nUDrfvdPeCD4bmw8+u/w==",
   "success": true,
-  "projectFilePath": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj",
+  "projectFilePath": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hai Trieu\\.nuget\\packages\\firebaseadmin\\2.3.0\\firebaseadmin.2.3.0.nupkg.sha512",
     "C:\\Users\\Hai Trieu\\.nuget\\packages\\google.api.gax\\3.2.0\\google.api.gax.3.2.0.nupkg.sha512",

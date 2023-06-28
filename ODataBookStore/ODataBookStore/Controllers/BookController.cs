@@ -53,9 +53,9 @@ namespace ODataBookStore.Controllers
             return Ok();
         }
 
-        [HttpPost("/AccountRegister")]
+        [HttpPost("/Account/Register")]
         public IActionResult AccountRegister
-            ([FromBody] RegisterRequest request)
+            ([FromQuery] string username, [FromQuery] string password)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace ODataBookStore.Controllers
                 #endregion
 
                 var checkAccount = _context.Accounts
-                    .FirstOrDefault(x => x.Username.Contains(request.Username));
+                    .FirstOrDefault(x => x.Username.Contains(username));
 
                 if (checkAccount != null)
                 {
@@ -96,8 +96,8 @@ namespace ODataBookStore.Controllers
 
                 //convert from string to byte
                 Account acc = new Account();
-                acc.Username = request.Username;
-                acc.Password = Ultils.GetHash(request.Password, _Prn231_Api);
+                acc.Username = username;
+                acc.Password = Ultils.GetHash(password, _Prn231_Api);
 
                 var role = _context.Roles.FirstOrDefault(x => x.RoleName == "Account");
                 if(role == null)
@@ -118,9 +118,9 @@ namespace ODataBookStore.Controllers
             }
         }
 
-        [HttpPost("/UserRegister")]
+        [HttpPost("/User/Register")]
         public IActionResult UserRegister
-            ([FromBody] RegisterRequest request)
+            ([FromQuery] string username, [FromQuery] string password)
         {
             try
             {
@@ -149,7 +149,7 @@ namespace ODataBookStore.Controllers
                 #endregion
 
                 var checkAccount = _context.Users
-                    .FirstOrDefault(x => x.Username.Contains(request.Username));
+                    .FirstOrDefault(x => x.Username.Contains(username));
 
                 if (checkAccount != null)
                 {
@@ -158,8 +158,8 @@ namespace ODataBookStore.Controllers
 
                 //convert from string to byte
                 User acc = new User();
-                acc.Username = request.Username;
-                acc.Password = Ultils.GetHash(request.Password, _Prn231_Api);
+                acc.Username = username;
+                acc.Password = Ultils.GetHash(password, _Prn231_Api);
 
                 var role = _context.Roles.FirstOrDefault(x => x.RoleName == "User");
                 if (role == null)
@@ -180,15 +180,15 @@ namespace ODataBookStore.Controllers
             }
         }
 
-        [HttpPost("/AccountLogin")]
+        [HttpPost("/Account/Login")]
         public IActionResult AccountLogin
-            ([FromBody] LoginRequest request)
+            ([FromQuery] string username, [FromQuery] string password)
         {
             try
             {
-                var admin = _context.Accounts.FirstOrDefault(x => x.Username.Contains(request.Username));
+                var admin = _context.Accounts.FirstOrDefault(x => x.Username.Contains(username));
 
-                if (admin == null || !Ultils.CompareHash(request.Password, admin.Password, _Prn231_Api))
+                if (admin == null || !Ultils.CompareHash(password, admin.Password, _Prn231_Api))
                 {
                     return BadRequest();
                 }
@@ -207,15 +207,15 @@ namespace ODataBookStore.Controllers
             }
         }
 
-        [HttpPost("/UserLogin")]
+        [HttpPost("/User/Login")]
         public IActionResult UserLogin
-            ([FromBody] LoginRequest request)
+            ([FromQuery] string username, [FromQuery] string password)
         {
             try
             {
-                var admin = _context.Users.FirstOrDefault(x => x.Username.Contains(request.Username));
+                var admin = _context.Users.FirstOrDefault(x => x.Username.Contains(username));
 
-                if (admin == null || !Ultils.CompareHash(request.Password, admin.Password, _Prn231_Api))
+                if (admin == null || !Ultils.CompareHash(password, admin.Password, _Prn231_Api))
                 {
                     return BadRequest();
                 }

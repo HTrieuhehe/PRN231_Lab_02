@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj": {}
+    "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj": {}
   },
   "projects": {
-    "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj": {
+    "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj",
+        "projectUniqueName": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj",
         "projectName": "ODataBookStoreWebClient",
-        "projectPath": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj",
+        "projectPath": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStoreWebClient\\ODataBookStoreWebClient.csproj",
         "packagesPath": "C:\\Users\\Hai Trieu\\.nuget\\packages\\",
-        "outputPath": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStoreWebClient\\obj\\",
+        "outputPath": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStoreWebClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj": {
-                "projectPath": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj"
+              "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj": {
+                "projectPath": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj"
               }
             }
           }
@@ -80,14 +80,14 @@
         }
       }
     },
-    "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj": {
+    "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj",
+        "projectUniqueName": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj",
         "projectName": "ODataBookStore",
-        "projectPath": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj",
+        "projectPath": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStore\\ODataBookStore.csproj",
         "packagesPath": "C:\\Users\\Hai Trieu\\.nuget\\packages\\",
-        "outputPath": "F:\\ProjectStudy\\PRN_231\\ODataBookStore\\ODataBookStore\\obj\\",
+        "outputPath": "F:\\ProjectStudy\\PRN_231\\PRN231_Lab_02\\ODataBookStore\\ODataBookStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

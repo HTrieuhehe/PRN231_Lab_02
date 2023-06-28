@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ODataBookStore.Models.Book>
+﻿
 @{
     ViewData["Title"] = "Login Page";
 }
@@ -62,11 +62,14 @@
 <body>
     <div class="container">
         <h2>Login</h2>
-        <form asp-controller="Login" asp-action="Login" method="post">
+        <form asp-action="AccountLogin" method="post">
+
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
+
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
+
             <button type="submit">Sign in</button>
         </form>
         <div class="signin">
