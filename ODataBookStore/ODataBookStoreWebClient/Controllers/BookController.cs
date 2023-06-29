@@ -69,7 +69,7 @@ namespace ODataBookStoreWebClient.Controllers
                
         }
 
-
+        //[HttpPost]
         public async Task<IActionResult> Create(Book book)
         {
             if (book == null)
@@ -78,7 +78,7 @@ namespace ODataBookStoreWebClient.Controllers
             }
 
             string jsonString = JsonSerializer.Serialize(book);
-            HttpResponseMessage response = await client.PostAsync(ProductApiUrl + $"{book}", null);
+            HttpResponseMessage response = await client.PostAsync("https://localhost:44319/odata/" + $"{book}", null);
 
             if(response.IsSuccessStatusCode)
             {
@@ -96,10 +96,26 @@ namespace ODataBookStoreWebClient.Controllers
         //}
 
 
-        //public IActionResult Edit(int id)
-        //{
+        public async Task<IActionResult> Edit(int id)
+        {
+           // HttpResponseMessage response = await client.GetAsync(ProductApiUrl + $"/{id}?$expand=Location,Press");
+            HttpResponseMessage response = await client.GetAsync(ProductApiUrl + $"/{id}");
+            string strData = await response.Content.ReadAsStringAsync();
+            dynamic temp = JObject.Parse(strData);
 
-        //}
+            Book book = new Book
+            {
+                Id = temp.Id,
+                ISBN = temp.ISBN,
+                Title = temp.Title,
+                Author = temp.Author,
+                Price = temp.Price,
+                LocationName = temp.LocationName,
+                PressId = temp.PressId,
+            };
+
+            return View(book);
+        }
 
 
         //[HttpPost]
@@ -110,10 +126,14 @@ namespace ODataBookStoreWebClient.Controllers
         //}
 
 
-        //public IActionResult Delete(int id)
-        //{
+        public async Task<IActionResult> Delete(int id)
+        {
+            HttpResponseMessage response = await client.GetAsync(ProductApiUrl + $"/{id}");
+            string strData = await response.Content.ReadAsStringAsync();
+            dynamic temp = JObject.Parse(strData);
 
-        //}
+            return View(temp);
+        }
 
 
         //[HttpPost]
