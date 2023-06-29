@@ -10,7 +10,6 @@ namespace ODataBookStore.Models
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Press> Presses { get;set; }
 

@@ -46,8 +46,9 @@ namespace ODataBookStore.Controllers
            }
            return BadRequest();
         }
+
         [EnableQuery]
-        public IActionResult Delete([FromBody]int key)
+        public IActionResult Delete([FromQuery]int key)
         {
             Book b = _context.Books.FirstOrDefault(b => b.Id == key);
             if (b == null)
@@ -94,45 +95,7 @@ namespace ODataBookStore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpPost("/User/Register")]
-        public IActionResult UserRegister
-            ([FromQuery] string username, [FromQuery] string password)
-        {
-            try
-            {
-                var checkAccount = _context.Users
-                    .FirstOrDefault(x => x.Username.Contains(username));
-
-                if (checkAccount != null)
-                {
-                    return BadRequest("Username Existed!");
-                }
-
-                //convert from string to byte
-                User acc = new User();
-                acc.Username = username;
-                acc.Password = Ultils.GetHash(password, _Prn231_Api);
-
-                var role = _context.Roles.FirstOrDefault(x => x.RoleName == "User");
-                if (role == null)
-                {
-                    return BadRequest();
-                }
-
-                acc.RoleId = role.Id;
-
-                _context.Users.Add(acc);
-                _context.SaveChanges();
-
-                return Ok(acc);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
+    
         [HttpPost("/Account/Login")]
         public IActionResult AccountLogin
             ([FromQuery] string username, [FromQuery] string password)
@@ -140,33 +103,6 @@ namespace ODataBookStore.Controllers
             try
             {
                 var admin = _context.Accounts.FirstOrDefault(x => x.Username.Contains(username));
-
-                if (admin == null || !Ultils.CompareHash(password, admin.Password, _Prn231_Api))
-                {
-                    return BadRequest();
-                }
-
-                //Create JWT Token
-
-                //--- string.IsNullOrEmpty(admin.Username) ? "" : admin.Username ---
-                //là một cách viết tắt của câu lệnh điều kiện if-else. Nó kiểm tra xem giá trị của biến admin.Username có là chuỗi rỗng hoặc null hay không
-                var newToken = AccessTokenManager.GenerateJwtToken(string.IsNullOrEmpty(admin.Username) ? "" : admin.Username, admin.RoleId, admin.Id, _configuration);
-
-                return Ok(newToken);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("/User/Login")]
-        public IActionResult UserLogin
-            ([FromQuery] string username, [FromQuery] string password)
-        {
-            try
-            {
-                var admin = _context.Users.FirstOrDefault(x => x.Username.Contains(username));
 
                 if (admin == null || !Ultils.CompareHash(password, admin.Password, _Prn231_Api))
                 {

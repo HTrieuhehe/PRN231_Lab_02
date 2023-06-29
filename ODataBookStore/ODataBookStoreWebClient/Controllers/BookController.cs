@@ -137,18 +137,15 @@ namespace ODataBookStoreWebClient.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Deletes(int id)
         {
-            HttpResponseMessage response = await client.GetAsync(ProductApiUrl + $"/{id}");
-            string strData = await response.Content.ReadAsStringAsync();
-            dynamic temp = JObject.Parse(strData);
-
+            //https://localhost:44319/odata/Book/2?key=2
+            HttpResponseMessage response = await client.GetAsync("https://localhost:44319/odata/Book" + $"/{id}" + "?key=" + $"{id}");
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Book");
             }
-
-            return View();
+            return RedirectToAction("Index", "Book");
         }
 
         //[HttpPost]
