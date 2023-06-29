@@ -51,21 +51,5 @@ namespace ODataBookStoreWebClient.Controllers
             return View("../Login/Index");
         }
 
-        public async Task<IActionResult> AccountRegister(string username, string password)
-        {
-            HttpResponseMessage response = await client.GetAsync(AccountRegisterApiUrl + $"username={username}&password={password}");
-            string strData = await response.Content.ReadAsStringAsync();
-            dynamic temp = JObject.Parse(strData);
-
-            Account account = new Account()
-            {
-                Id = temp.Id,
-                RoleId = temp.RoleId,
-                Username = temp.Username,
-            };
-            return View(account);
-
-        }
-
     }
 }

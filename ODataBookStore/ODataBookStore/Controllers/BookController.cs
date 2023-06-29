@@ -22,7 +22,7 @@ namespace ODataBookStore.Controllers
             _configuration = configuration;
             _Prn231_Api = _configuration["PRN231"];
         }
-        [EnableQuery(PageSize =2)]
+        [EnableQuery(PageSize = 10)]
         public IActionResult Get()
         {
             return Ok(_context.Books.Include(b=>b.Location).Include(b=>b.Press).AsQueryable());
@@ -59,37 +59,10 @@ namespace ODataBookStore.Controllers
 
         [HttpPost("/Account/Register")]
         public IActionResult AccountRegister
-            ([FromQuery] string username, [FromQuery] string password)
+            ([FromQuery] string username, [FromQuery] string password, [FromQuery] int roleId)
         {
             try
             {
-                #region checkRole
-                /*
-                    đoạn code này thật sự dơ như không còn cách nào khác
-                    vì hiện tại nó vẫn còn lỗi lúc update-database chưa biết lỗi sao mà ko tạo được dữ liệu của bảng Role, ai fix đc thì cảm ơn rất nhiều
-                    đoạn code này sẽ check nếu bảng Role nó null sẽ tạo dữ liệu với với Id = 1 <=> Account và Id =2 <=> User :)))
-                 */
-
-                var checkRole = _context.Roles.FirstOrDefault();
-                if (checkRole == null)
-                {
-                    Role accountRole = new Role();
-                    Role userRole = new Role();
-
-                    accountRole.Id = 1;
-                    accountRole.RoleName = "Account";
-
-                    userRole.Id = 2;
-                    userRole.RoleName = "User";
-
-                    _context.Roles.Add(accountRole);
-                    _context.Roles.Add(userRole);
-                    _context.SaveChanges();
-                }
-
-
-                #endregion
-
                 var checkAccount = _context.Accounts
                     .FirstOrDefault(x => x.Username.Contains(username));
 
@@ -103,7 +76,7 @@ namespace ODataBookStore.Controllers
                 acc.Username = username;
                 acc.Password = Ultils.GetHash(password, _Prn231_Api);
 
-                var role = _context.Roles.FirstOrDefault(x => x.RoleName == "Account");
+                var role = _context.Roles.FirstOrDefault(x => x.Id == roleId);
                 if(role == null)
                 {
                     return BadRequest();
@@ -128,30 +101,6 @@ namespace ODataBookStore.Controllers
         {
             try
             {
-                #region checkRole
-                /*
-                    đoạn code này thật sự dơ như không còn cách nào khác
-                    vì hiện tại nó vẫn còn lỗi lúc update-database chưa biết lỗi sao mà ko tạo được dữ liệu của bảng Role, ai fix đc thì cảm ơn rất nhiều
-                    đoạn code này sẽ check nếu bảng Role nó null sẽ tạo dữ liệu với với Id = 1 <=> Account và Id =2 <=> User :)))
-                 */
-                var checkRole = _context.Roles;
-                if (checkRole == null)
-                {
-                    Role accountRole = new Role();
-                    Role userRole = new Role();
-
-                    accountRole.Id = 1;
-                    accountRole.RoleName = "Account";
-
-                    userRole.Id = 2;
-                    userRole.RoleName = "User";
-
-                    _context.Roles.Add(accountRole);
-                    _context.Roles.Add(userRole);
-                    _context.SaveChanges();
-                }
-                #endregion
-
                 var checkAccount = _context.Users
                     .FirstOrDefault(x => x.Username.Contains(username));
 
