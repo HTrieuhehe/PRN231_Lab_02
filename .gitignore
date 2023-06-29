@@ -1,0 +1,12 @@
+
+*.editorconfig
+
+*.vsidx
+
+*.exe
+
+ODataBookStore/.vs/ODataBookStore/v17/.suo
+
+*.cache
+
+*.props
