@@ -1,67 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ODataBookStore.Migrations
 {
-    public partial class initial : Migration
+    public partial class BookStore : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "Accounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
-                 constraints: table =>
-                 {
-                     table.PrimaryKey("PK_Role", x => x.Id);
-                 });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
+                constraints: table =>
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "int", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Password = table.Column<string>(type: "varbinary(max)", nullable: false)
-                },
-                 constraints: table =>
-                 {
-                     table.PrimaryKey("PK_User", x => x.Id);
-                     table.ForeignKey(
-                         name: "FK_User_Role",
-                         column: x => x.RoleId,
-                         principalTable: "Role",
-                         principalColumn: "Id",
-                         onDelete: ReferentialAction.Cascade);
-                 });
-
-            migrationBuilder.CreateTable(
-                name: "Account",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "int", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Password = table.Column<string>(type: "varbinary(max)", nullable: false)
-                },
-                 constraints: table =>
-                 {
-                     table.PrimaryKey("PK_Account", x => x.Id);
-                     table.ForeignKey(
-                         name: "FK_Account_Role",
-                         column: x => x.RoleId,
-                         principalTable: "Role",
-                         principalColumn: "Id",
-                         onDelete: ReferentialAction.Cascade);
-                 });
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Address",
@@ -76,7 +37,7 @@ namespace ODataBookStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Press",
+                name: "Presses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -86,11 +47,39 @@ namespace ODataBookStore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Press", x => x.Id);
+                    table.PrimaryKey("PK_Presses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Books",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -104,29 +93,20 @@ namespace ODataBookStore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.Id);
+                    table.PrimaryKey("PK_Books", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Book_Address_LocationName",
+                        name: "FK_Books_Address_LocationName",
                         column: x => x.LocationName,
                         principalTable: "Address",
                         principalColumn: "City",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_Press_PressId",
+                        name: "FK_Books_Presses_PressId",
                         column: x => x.PressId,
-                        principalTable: "Press",
+                        principalTable: "Presses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            //migrationBuilder.InsertData(
-            //    table: "Role",
-            //    columns: new[] { "Id", "RoleName"},
-            //    values: new object[,]
-            //    {
-            //        { 1, "Account"},
-            //        { 2, "User" }
-            //    });
 
             migrationBuilder.InsertData(
                 table: "Address",
@@ -140,7 +120,7 @@ namespace ODataBookStore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Press",
+                table: "Presses",
                 columns: new[] { "Id", "Category", "Name" },
                 values: new object[,]
                 {
@@ -150,7 +130,16 @@ namespace ODataBookStore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Book",
+                table: "Roles",
+                columns: new[] { "Id", "RoleName" },
+                values: new object[,]
+                {
+                    { 1, "Account" },
+                    { 2, "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Books",
                 columns: new[] { "Id", "Author", "ISBN", "LocationName", "PressId", "Price", "Title" },
                 values: new object[,]
                 {
@@ -161,39 +150,35 @@ namespace ODataBookStore.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_LocationName",
-                table: "Book",
+                name: "IX_Books_LocationName",
+                table: "Books",
                 column: "LocationName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_PressId",
-                table: "Book",
+                name: "IX_Books_PressId",
+                table: "Books",
                 column: "PressId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "Account");
+                name: "Books");
 
             migrationBuilder.DropTable(
-                name: "User");
-            
+                name: "Roles");
+
             migrationBuilder.DropTable(
-                name: "Book");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Address");
 
             migrationBuilder.DropTable(
-                name: "Press");
+                name: "Presses");
         }
-
-
-        //mở Package Manager Console lên trỏ tới cái project API và nhập update-database là ok
-
     }
 }
