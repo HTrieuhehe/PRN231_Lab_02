@@ -78,7 +78,7 @@ namespace ODataBookStoreWebClient.Controllers
             }
 
             string jsonString = JsonSerializer.Serialize(book);
-            HttpResponseMessage response = await client.PostAsync("https://localhost:44319/odata/" + $"{book}", null);
+            HttpResponseMessage response = await client.PostAsync("https://localhost:44319/odata/Book" + $"/{book}", null);
 
             if(response.IsSuccessStatusCode)
             {
@@ -103,28 +103,39 @@ namespace ODataBookStoreWebClient.Controllers
             string strData = await response.Content.ReadAsStringAsync();
             dynamic temp = JObject.Parse(strData);
 
-            Book book = new Book
+            if (response.IsSuccessStatusCode)
             {
-                Id = temp.Id,
-                ISBN = temp.ISBN,
-                Title = temp.Title,
-                Author = temp.Author,
-                Price = temp.Price,
-                LocationName = temp.LocationName,
-                PressId = temp.PressId,
-            };
-
-            return View(book);
+                Book book = new Book
+                {
+                    Id = temp.Id,
+                    ISBN = temp.ISBN,
+                    Title = temp.Title,
+                    Author = temp.Author,
+                    Price = temp.Price,
+                    LocationName = temp.LocationName,
+                    PressId = temp.PressId,
+                };
+                return View(book);
+            }
+            return View();
         }
 
+        public async Task<IActionResult> Update(Book book)
+        {
+            if (book == null)
+            {
+                return View("~/Views/Book/Create.cshtml");
+            }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(int id, IFormCollection collection)
-        //{
+            string jsonString = JsonSerializer.Serialize(book);
+            HttpResponseMessage response = await client.PostAsync("https://localhost:44319/odata/Book" + $"/{book}", null);
 
-        //}
-
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Book");
+            }
+            return View();
+        }
 
         public async Task<IActionResult> Delete(int id)
         {
@@ -132,9 +143,19 @@ namespace ODataBookStoreWebClient.Controllers
             string strData = await response.Content.ReadAsStringAsync();
             dynamic temp = JObject.Parse(strData);
 
-            return View(temp);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Book");
+            }
+
+            return View();
         }
 
+        //[HttpPost]
+        //public IActionResult Edit(int id, IFormCollection collection)
+        //{
+
+        //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]

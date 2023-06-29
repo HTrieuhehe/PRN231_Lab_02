@@ -38,9 +38,13 @@ namespace ODataBookStore.Controllers
         [EnableQuery]
         public IActionResult Post([FromBody] Book book)
         {
-            _context.Books.Add(book);
-            _context.SaveChanges();
-            return Created(book);
+           if (book != null)
+           {
+                _context.Books.Add(book);
+                _context.SaveChanges();
+                return Created(book);
+           }
+           return BadRequest();
         }
         [EnableQuery]
         public IActionResult Delete([FromBody]int key)
