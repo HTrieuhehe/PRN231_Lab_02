@@ -229,28 +229,6 @@ namespace ODataBookStore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ODataBookStore.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<byte[]>("Password")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("ODataBookStore.Models.Book", b =>
                 {
                     b.HasOne("ODataBookStore.Models.Address", "Location")
